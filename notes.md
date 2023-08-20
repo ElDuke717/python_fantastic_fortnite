@@ -286,3 +286,355 @@ real
     the real part of a complex number
 (END)
 ```
+
+## Functions
+
+Functions are blocks of code that can be reused. They are defined with the `def` keyword followed by a space. Then the name of the function. Then a set of parentheses. Then a colon. Then the body of the function. The body of the function is indented.
+
+There are no brackets, indentation is used. The indentation is usually 4 spaces. Tab will give you four spaces in the Python interpreter.
+
+Hit enter twice to exit the function.
+
+```python
+>>> def foo():
+...     print("Hello guys!")
+...
+>>> foo()
+Hello guys!
+>>>
+
+```
+
+This function returns nothing, just uses the
+`print()` function to print a string.
+
+```python
+>>> def meaning_of_life():
+...     return 42
+...
+>>> meaning_of_life()
+42
+```
+
+Here we assign the evaluated result of a function to a variable.
+
+```python
+>>> called_foo = foo()
+Hello guys!
+>>> x = meaning_of_life()
+>>> x
+42
+```
+
+And we can pass arguments to functions.
+
+```python
+>>> def add_numbers(x, y):
+...     return x + y
+...
+>>> add_numbers(3, 5)
+8
+>>> a = 1
+>>> b = 5
+>>> add_numbers(a, b)
+6
+```
+
+If we don't use the proper syntax, we'll get an error:
+
+```python
+>>> def oops:
+  File "<stdin>", line 1
+    def oops:
+            ^
+SyntaxError: invalid syntax
+```
+
+The return statement is optional, if you don't use it, the function will return `None`.
+
+```python
+>>> def greeting(name):
+...     greeting = "Hello "
+...     return greeting + name
+...
+>>> greeting("Bill")
+'Hello Bill'
+```
+
+You can have a return statement that has no value.
+
+If we return nothing from a function, and then check the
+`type` on the output, then we will see that it is `None`.
+
+```python
+>>> def foo():
+...     x = 5
+...     return
+...
+>>> x = foo()
+>>> type(x)
+<class 'NoneType'>
+```
+
+It will return from anywhere within the function.
+You will get an error of unreachable code if you try to return from a function after a return statement.
+
+### Arguments
+
+Arguments are the values that are passed to a function. They are defined in the parentheses after the function name.
+
+```python
+>>> add_numbers(3,5)
+8
+>>> add_numbers(3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: add_numbers() missing 1 required positional argument: 'y'
+```
+
+If you don't include a required argument, you'll get an error. In this case it's a TypeError.
+
+Python also has keyword arguments with default values. These are optional arguments.
+
+```python
+>>> def say_greeting(greeting, name):
+...     print(f"{greeting}, {name}")
+...
+>>> say_greeting("Hello", "Dr. Steve")
+Hello, Dr. Steve
+>>>
+```
+
+### Default values
+
+Default values always come last.
+
+Here's an example of using a default value.
+
+```python
+>>> def say_greeting(name, greeting="Hello"):
+...     print(f"{greeting}, {name}")
+...
+>>> say_greeting("Dr. Steve")
+Hello, Dr. Steve
+
+# Changing the default value
+>>> say_greeting("Dr. Steve", "Bonjour")
+Bonjour, Dr. Steve
+```
+
+Here we'll use the program written before, with default values assigned to the arguments.
+
+```python
+>>> def create_query(language="Javascript", num_stars=50, sort="desc"):
+...     return f"language: {language}, {num_stars} {sort}"
+...
+>>> create_query()
+'language: Javascript, 50 desc'
+
+```
+
+When we call the function without any arguments, it will use the default values.
+
+```python
+>>> create_query(language="Python")
+'language: Python, 50 desc'
+```
+
+Above we add Python as the language, and it uses Python as the default for the language parameter but it will still use the default values for the other arguments.
+
+```python
+>>> create_query(language="Python", sort=100, num_stars=1)
+'language: Python, 1 100'
+```
+
+Above we change the sort and num_stars arguments.
+
+```python
+
+```
+
+### Empty Default Lists
+
+You never want to use mutable objects as default values. Mutable objects are objects that can be changed. Lists are mutable objects. If you use a list as a default value, it will be shared between all calls to the function.
+
+```python
+>>> def foo(a, b=[]):
+...     b.append(a)
+...     print("B is: ", b)
+...
+>>> foo(5)
+B is:  [5]
+>>> foo(6)
+B is:  [5, 6]
+```
+
+6 is added to the list because it is passed in on the second invocation of the function. The list is shared between the two calls to the function.
+
+Note: you want to name your variables with as much meaning as possible. `a` and `b` are not good variable names. Make them as descriptive as possible.
+
+Check out this talk by Brandon Rhodes on [The Naming of Ducks: Where Dynamic Types Meet Smart Conventions](https://www.youtube.com/watch?v=YklKUuDpX5c).
+
+![Alt text](image.png)
+
+### Function Scope
+
+Variables defined inside a function are not available outside the function. This is called scope.
+
+> Function scope in Python and JavaScript has some similarities, but there are also important differences:
+>
+> **Python Function Scope:**
+>
+> In Python, a variable defined within a function is considered to have function scope. This means that the variable is accessible only within the function in which it is defined and any nested functions.
+
+```python
+def my_function():
+    x = 10  # Variable x has function scope
+    print(x)
+
+my_function()
+# print(x)  # This will result in an error because x is not accessible here
+```
+
+> **JavaScript Function Scope:**
+>
+> In JavaScript, until the introduction of the `let` and `const` keywords, variables declared within a function were considered to have function scope. This means they were accessible within the function they were defined in and any nested functions. However, this could sometimes lead to unexpected behavior known as "hoisting," where variables declared with `var` are brought to the top of their function or global scope.
+
+```javascript
+function myFunction() {
+  var y = 20; // Variable y has function scope
+  console.log(y);
+}
+
+myFunction();
+// console.log(y);  // This will result in an error or undefined
+```
+
+> **Block Scope:**
+
+> With the introduction of the `let` and `const` keywords in JavaScript, you can now also have block-scoped variables. This means that a variable declared with `let` or `const` is accessible only within the block of code (within curly braces) where it's defined.
+
+```javascript
+function myFunction() {
+  if (true) {
+    let z = 30; // Variable z has block scope
+    console.log(z);
+  }
+  // console.log(z);  // This will result in an error because z is not accessible here
+}
+```
+
+> **Arrow Functions and Scope:**
+>
+> In JavaScript, arrow functions introduced in ES6 have a unique behavior with regard to scope. Arrow functions do not have their own `this` context and inherit the `this` value from the enclosing function or context.
+
+```javascript
+function outerFunction() {
+  var self = this; // Store the value of this in a variable
+  setTimeout(function () {
+    console.log(self); // This will print the value of this from outerFunction
+  }, 1000);
+}
+
+outerFunction();
+```
+
+> In Python, arrow functions are not present, so the scope and `this` context behavior is different.
+
+> In summary, while both Python and JavaScript have function scope, JavaScript has some nuances related to hoisting, the introduction of block scope with `let` and `const`, and the behavior of arrow functions. Understanding these differences is crucial for writing clean and error-free code in both languages.
+
+See in this example that `account` is not available outside the function.
+
+```python
+>>> def twitter_info():
+...     account = "elona_musc"
+...     print(f"Account inside the function is {account}")
+...
+>>> twitter_info()
+Account inside the function is elona_musc
+>>> account
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'account' is not defined
+```
+
+It throws an error when called outside the funtion.
+
+See in this example where we try to change the name
+declared outside the function.
+
+```python
+>>> name = "Reza"
+>>> def try_change_name():
+...     name = "Wanda"
+...     print(f"Name inside of function: {name}")
+...
+>>> try_change_name()
+Name inside of function: Wanda
+>>> name
+'Reza'
+```
+
+The name is not changed outside the function, but when we call the function, it uses the `name` variable defined inside of the function.
+
+When we use an f-string to see what the value of `name` is outside of the function, we see that it is still `Reza`.
+
+```python
+>>> f"Name outside of the function: {name}"
+'Name outside of the function: Reza'
+```
+
+We don't really want to follow this pattern, so in general in our production Python programs, we don't want too many variables floating around outside of functions or defined scope. Probably better to use a constant.
+
+** Don't do this: **
+
+```python
+>>> def foo(a, b=[]):
+...     b.append(a)
+...     print(b)
+...
+>>> foo(1)
+[1]
+>>> foo(5)
+[1, 5]
+```
+
+This will introduce a bug in your program. Instead, do this:
+
+```python
+>>> def foo(a, b=None):
+...     if b is None:
+...             b = []
+...     b.append(a)
+...     print(b)
+...
+>>> foo(1)
+[1]
+>>> foo(5)
+[5]
+```
+
+Use control flow to check if the argument is `None`. If it is, then assign an empty list to it.
+
+### Practice
+
+```python
+>>> def add_numbers(x, y):
+...     return x + y
+...
+>>> first_num=15
+>>> second_num=25
+>>> print(f"The sum of {first_num} and {second_num} is {add_numbers(first_num, second_num)}")
+The sum of 15 and 25 is 40
+```
+
+Here's an indentation error:
+
+```python
+>>> def add_numbers(x, y):
+... return x + y
+  File "<stdin>", line 2
+    return x + y
+    ^
+IndentationError: expected an indented block
+```
