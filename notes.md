@@ -638,3 +638,487 @@ Here's an indentation error:
     ^
 IndentationError: expected an indented block
 ```
+
+#### Positional Arguments vs. Keyword Arguments
+
+```python
+
+>>> def calculate_numbers(x, y, operation="add"):
+...     if operation == "add":
+...         return x + y
+...     elif operation == "subtract":
+...         return x - y
+...
+# Let's try our new function. Remember, if we don't pass the operation keyword argument, the default is "add"
+>>> calculate_numbers(2, 3)
+# You can pass a keyword argument as a normal positional argument
+>>> calculate_numbers(2, 3, "subtract")
+# You can also use the argument's keyword. This helps with readability
+>>> calculate_numbers(2, 3, operation="subtract")
+
+```
+
+Note that you can use the keyword argument as a positional argument.
+
+The x and y arguments for our add_numbers() function are called positional arguments. Python also lets us declare keyword arguments. Keyword arguments are great for setting default values, because passing them is optional. Just remember that keyword arguments must come after any positional arguments. Let’s make a more generic function for doing math:
+
+## Advanced Data Types - Containers and Sequences
+
+Now that we’ve got the basics of strings and numbers down, let’s talk about the advanced data types - list, tuple, dict and set. These are container objects that let us organize other types of objects into one data structure.
+
+### Lists
+
+Lists are ordered sequences of objects. They are defined with square brackets. They are mutable, which means that they can be changed after they are created. They can contain any type of object.
+
+**remember that you should not name your variables `list`**
+
+```python
+>>> names=["Duke", "Betty", "Puma"]
+>>> type(names)
+<class 'list'>
+>>> print(names)
+['Duke', 'Betty', 'Puma']
+```
+
+We have the `.lower()` method available on strings. It converts the string to lowercase.
+
+```python
+>>> "Mike".lower()
+'mike'
+```
+
+We also can determine the length of a string with the `len()` function.
+
+```python
+>>> len(names)
+3
+>>>
+```
+
+Lists use indexing just like arrays in other languages. The first element is at index 0.
+
+```python
+>>> names[0]
+'Duke'
+>>> names[1]
+'Betty'
+>>> names[-1]
+'Puma'
+```
+
+Negative indexing starts from the end of the list.
+
+You can use a new line with enter in the REPL to enter in more elements.
+
+```python
+>>> people=[
+... "Bill", "Mike", "Sandy", "Joaquin"
+... ]
+>>> people
+['Bill', 'Mike', 'Sandy', 'Joaquin']
+```
+
+Be careful with the syntax of the list in the REPL.
+
+### Changing the Order of a List
+
+```python
+>>> sorted(lottery_numbers)
+[1, 4, 11, 78, 34242]
+>>> lottery_numbers
+[1, 4, 34242, 78, 11]
+```
+
+Here we can sort numbers in reverse order.
+
+```python
+>>> sorted(lottery_numbers, reverse=True)
+[34242, 78, 11, 4, 1]
+>>> lottery_numbers
+[1, 4, 34242, 78, 11]
+```
+
+But when we print the list, it's still in the original order.
+
+```python
+
+```
+
+Calling `sorted()` returns a copy. So we can save it to a variable.
+
+```python
+x = sorted(lottery_numbers)
+```
+
+```python
+>>> x = sorted(lottery_numbers)
+>>> x
+[1, 4, 11, 78, 34242]
+```
+
+We can also `reverse()` the list.
+
+```python
+>>> lottery_numbers.sort()
+>>> lottery_numbers
+[1, 4, 11, 78, 34242]
+>>> lottery_numbers.reverse()
+>>> lottery_numbers
+[34242, 78, 11, 4, 1]
+
+```
+
+Here we test the data type of `lottery_numbers`, then use the help function to see what methods are available on the list, then use help to see what the `reverse()` method does.
+
+```python
+>>> type(lottery_numbers)
+<class 'list'>
+>>> dir(list)
+['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> help(list.reverse)
+```
+
+```python
+Help on method_descriptor:
+
+reverse(self, /)
+    Reverse *IN PLACE
+```
+
+See the cheat sheet for more methods on lists [here](https://www.learnpython.dev/02-introduction-to-python/080-advanced-datatypes/10-lists/#list-cheat-sheet).
+
+### Adding items to a list
+
+We can add items to a list with the `append()` method.
+
+```python
+>>> names.append("Sammy")
+>>> names
+['Duke', 'Betty', 'Puma', 'Sammy']
+```
+
+We can also add items to a list with the `insert()` method.
+
+```python
+>>> names.insert(0, "Pixie")
+>>> names
+['Pixie', 'Duke', 'Betty', 'Puma', 'Sammy']
+```
+
+We can again use the `help()` function to see what the `insert()` method does.
+
+```python
+>>> help(list.insert)
+```
+
+```python
+Help on method_descriptor:
+
+insert(self, index, object, /)
+    Insert object before index.
+```
+
+We can also `extend()` a list with another list.
+
+```python
+>>> names.extend(["Sandy", "Joaquin"])
+>>> names
+['Pixie', 'Duke', 'Betty', 'Puma', 'Sammy', 'Sandy', 'Joaquin']
+```
+
+or
+
+```python
+>>> colors = ['beige', 'chartreuse']
+>>> names.extend(colors)
+>>> names
+['Pixie', 'Duke', 'Betty', 'Puma', 'Sammy', 'Sandy', 'Joaquin', 'beige', 'chartreuse']
+```
+
+## List lookup
+
+Lookups are a very slow operation under the hood.
+
+Here's a way to find an element in a list:
+
+```python
+>>> names = ['Nina', 'Max', 'Phillip', 'Nina']
+>>> "Rose" in names
+False
+>>> "Nina" in names
+True
+```
+
+We can also return the index of an item in a list, but it will only return the first occurrence of the item.
+
+```python
+>>> names.index("Nina")
+0
+```
+
+We can also get the count of an element.
+
+```python
+>>> names.count("Nina")
+2
+```
+
+Here we change the element at a specific index in a list.
+
+```python
+>>> names
+['Nina', 'Max', 'Phillip', 'Nina']
+>>> pos = names.index("Phillip")
+>>> names[pos] = "Maja"
+>>> names
+['Nina', 'Max', 'Maja', 'Nina']
+```
+
+'Maja' replaces 'Phillip' in the list.
+
+## Removing items from a list
+
+We can remove items from a list with the `remove()` method.
+
+```python
+>>> names.remove("Nina")
+>>> names
+['Max', 'Maja', 'Nina']
+```
+
+Notice that it removes the first instance of the item.
+
+We can also remove items from a list with the `pop()` method. It removes the last item from the list. And returns it.
+
+```python
+>>> names.pop()
+'Nina'
+```
+
+`pop()` can also take an index as an argument.
+
+```python
+>>> names
+['Max', 'Maja', 'Nina']
+>>> names.pop(1)
+'Maja'
+>>> names
+['Max', 'Nina']
+```
+
+Use lists to store similar items. Like a list of names, or a list of numbers.
+
+For a large list, looking for an item is slow.
+
+You can even make a list of lists!
+
+### Tuples
+
+Tuples are immutable lists. They are defined with parentheses. They are immutable, which means that they can't be changed after they are created. They can contain any type of object.
+
+They are used to keep track of related, but different items.
+
+Tuples can be used to store snapshots of data.
+
+For example, if you want to store the coordinates of a point in a 2D plane, you can use a tuple. If you wanted to represent a spreadsheet in your code, a tuple would represent a row.
+
+```python
+# Creating a tuple
+person = ("John", 30, "Engineer")
+
+# Accessing elements in a tuple
+print(person[0])  # Output: John
+print(person[1])  # Output: 30
+print(person[2])  # Output: Engineer
+
+# Tuple unpacking - it's like destructuring in JavaScript
+name, age, occupation = person
+print(name)       # Output: John
+print(age)        # Output: 30
+print(occupation) # Output: Engineer
+
+# Nested tuples
+nested_tuple = ((1, 2), (3, 4))
+print(nested_tuple[0][0])  # Output: 1
+print(nested_tuple[1][1])  # Output: 4
+
+```
+
+Note that tuples still use square brackets for indexing.
+
+Also, note that we use unpacking to assign the values of the tuple to variables. It's just like destructuring in JavaScript.
+
+```python
+>>> # Tuple unpacking
+>>> name, age, occupation = person
+>>> print(name)       # Output: John
+John
+>>> print(age)        # Output: 30
+30
+>>> print(occupation) # Output: Engineer
+Engineer
+```
+
+Here's another example of unpacking, note the use of an empty space to skip an element.
+
+```python
+>>> student = ("Marcy", 8, "History", 3.5)
+>>> student
+('Marcy', 8, 'History', 3.5)
+>>> name, age, subject, gpa = student
+>>> subject
+'History'
+>>> age
+8
+>>> name, age, subject, _ = student
+>>> # We use the underscore in case we're not interested in the gpa
+```
+
+Tuples can be returned from functions.
+
+```python
+>>> def http_status_code():
+...     return 200, "OK"
+...
+>>> code, value = http_status_code()
+>>> code
+200
+>>> value
+'OK'
+```
+
+In this code snippet, we're defining a Python function called `http_status_code` that returns a tuple containing two values: `200` and `"OK"`.
+
+1. First, we define the function `http_status_code` using the `def` keyword. Inside the function, we don't explicitly create a tuple; we just return two values separated by a comma.
+
+2. Then, we call the `http_status_code` function and assign its return value to the variables `code` and `value`. The comma-separated values returned by the function are automatically packed into a tuple.
+
+3. When you print the value of `code`, it's the first element of the tuple returned by the function, which is `200`.
+
+4. Similarly, when we print the value of `value`, it's the second element of the tuple returned by the function, which is `'OK'`.
+
+In summary, the function returns a tuple with two elements, and you unpack those elements into separate variables `code` and `value`. This is an example of tuple packing and unpacking in Python.
+
+**Keep in mind that it's the comma, not the parentheses that makes a tuple.**
+
+```python
+>>> x = 1, 2, 3
+>>> type(x)
+<class 'tuple'>
+```
+
+Tuples are immutable and can't be sorted in place.
+
+## Sets
+
+Sets in Python are a datatype that allows you to store other immutable types in an unordered way. Sets are mutable, which means that they can be changed after they are created. They can contain any type of object.
+
+There are no duplicates allowed in a set.
+
+Curly braces are used by sets and dictionaries.
+
+```python
+>>> x = {1, 2, 3}
+>>> type(x)
+<class 'set'>
+```
+
+You must be explicit when you're making an empty
+set.
+
+```python
+>>> type({})
+<class 'dict'>
+>>> set()
+set()
+>>> {1}
+{1}
+>>> type({1})
+<class 'set'>
+```
+
+Check out [curses](https://docs.python.org/3/howto/curses.html) for a way to make a terminal based UI.
+
+Sets can only contain immutable objects.
+
+```python
+>>> names = {"Nina", "Max", "Nina"}
+>>> names
+{'Nina', 'Max'}
+>>> len(names)
+2
+```
+
+```python
+>>> hash("Nina")
+5662044684965568418
+>>> hash([])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+>>> {[]}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+>>>
+```
+
+Sets and lists are both unhashable.
+
+```python
+>>> colors = ["Red", "Yellow", "Red", "Green", "Green", "Green"]
+>>> set(colors)
+{'Red', 'Green', 'Yellow'}
+```
+
+Sets don't have an order - they may be printed in a different order than they were created.
+
+You can add items to a set with the `add()` method.
+
+```python
+Help on method_descriptor:
+
+add(...)
+    Add an element to a set.
+
+    This has no effect if the element is already present.
+```
+
+You can also get rid of items in a set with the `discard()` method.
+
+```python
+>>> colors = {"Red", "Green", "Blue"}
+>>> colors.discard("Green")
+>>> colors
+{'Blue', 'Red'}
+>>> colors.discard("Green")
+>>> colors
+{'Blue', 'Red'}
+```
+
+You can also use the `remove()` method to remove an item from a set, which will raise a KeyError if the item doesn’t exist.
+
+```python
+
+```
+
+You can use set operations for comparisons.
+
+```python
+>>> rainbow_colors = {"Red", "Orange", "Yellow", "Green", "Blue", "Violet"}
+>>> favorite_colors = {"Blue", "Pink", "Black"}
+>>> rainbow_colors | favorite_colors # union operator - combines the two sets
+{'Pink', 'Violet', 'Blue', 'Yellow', 'Black', 'Red', 'Green', 'Orange'}
+>>> rainbow_colors & favorite_colors # intersection operator - returns the items that are in both sets
+{'Blue'}
+>>> rainbow_colors ^ favorite_colors # symmetric difference operator - returns the items that are in one set or the other, but not both
+{'Pink', 'Violet', 'Yellow', 'Black', 'Red', 'Green', 'Orange'}
+>>> rainbow_colors - favorite_colors # difference operator - returns the items that are in the first set, but not the second
+{'Violet', 'Yellow', 'Red', 'Green', 'Orange'}
+```
+
+There is the '|' operator for union, the '&' operator for intersection, and the '-' operator for difference.
+
+Link to the [cheatsheet](https://www.learnpython.dev/02-introduction-to-python/080-advanced-datatypes/50-sets/#set-operations)
+
+Sets do not have `.index()` or `.count()` methods.
