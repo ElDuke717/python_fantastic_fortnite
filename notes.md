@@ -1122,3 +1122,235 @@ There is the '|' operator for union, the '&' operator for intersection, and the 
 Link to the [cheatsheet](https://www.learnpython.dev/02-introduction-to-python/080-advanced-datatypes/50-sets/#set-operations)
 
 Sets do not have `.index()` or `.count()` methods.
+
+You can run the list constructor on a set to make it a list.
+
+```python
+>>> rainbow_colors
+{'Green', 'Violet', 'Blue', 'Red', 'Orange', 'Yellow'}
+>>> list(rainbow_colors)
+['Green', 'Violet', 'Blue', 'Red', 'Orange', 'Yellow']
+```
+
+And you can save a list to a variable and use methods on it.
+
+```python
+
+>>> list_colors = list(rainbow_colors)
+>>> list_colors
+['Green', 'Violet', 'Blue', 'Red', 'Orange', 'Yellow']
+>>> list_colors.sort()
+>>> list_colors
+['Blue', 'Green', 'Orange', 'Red', 'Violet', 'Yellow']
+
+```
+
+## Dictionaries
+
+Dictionaries are a data structure for storing our data in key value pairs. They are defined with curly braces. They are mutable, which means that they can be changed after they are created. They can contain any type of object.
+
+They are ideal when working with JSON.
+
+Checking to see if a key is in a dictionary is a fast operation. Like within a list, you don't have to check each one by one.
+
+To make an empty dictionary, use curly braces.
+
+```python
+>>> {}
+{}
+>>> type({})
+<class 'dict'>
+```
+
+To make a dictionary a set
+
+```python
+>>> {1:"one"}
+{1: 'one'}
+```
+
+Only immutable types can be used as keys in a dictionary.
+
+```python
+>>> nums = {'one': 1, 'two': 2, 'three':3}
+>>> type(nums)
+<class 'dict'>
+>>> nums
+{'one': 1, 'two': 2, 'three': 3}
+>>> # access the item in a dictionary - add the key and get back the value
+>>> nums['one']
+1
+```
+
+If you try to use indexing, you'll get a key error.
+
+```python
+>>> nums[0]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 0
+```
+
+The `.get()` method is a safer way to access a dictionary, but it won't thrown an error if an item is not found.
+
+```python
+>>> nums.get('four')
+>>> # does not throw an explicit error
+>>> nums['four']
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'four'
+>>> nums.get('one')
+1
+```
+
+You can also use the `.get()` method to return a default value if the key is not found.
+
+```python
+>>> nums.get('four', 'default value')
+'default value'
+```
+
+## Adding and Removing Items from a Dictionary
+
+Dictionaries are mutable.
+
+Here's how you add items to your dictionary.
+
+```python
+>>> nums['four'] = 4
+>>> nums
+{'one': 1, 'two': 2, 'three': 3, 'four': 4}
+```
+
+If you add something at the same key, it will overwrite the previous value.
+
+```python
+>>> nums['two'] = 'tooooo'
+>>> nums
+{'one': 1, 'two': 'tooooo', 'three': 3, 'four': 4}
+```
+
+We can also use the 'in' keyword to check if a key is in a dictionary.
+
+```python
+>>> nums
+{'one': 1, 'two': 'tooooo', 'three': 3, 'four': 4}
+>>> 'two' in nums
+True
+>>> 1 in nums
+False
+```
+
+It works for the keys, but not the values.
+
+You can use the update method to update a dictionary with another dictionary.
+
+```python
+>>> colors = {"r": "Red", "g": "Green"}
+>>> numbers = {1: "one", 2: "two"}
+>>> colors.update(numbers)
+>>> colors
+{'r': 'Red', 'g': 'Green', 1: 'one', 2: 'two'}
+```
+
+A very useful implementation of dictionaries is to use them for a list.
+
+This is a common pattern of storing a list in a dictionary.
+
+```python
+>>> colors = {"Green": ["Spinach"]}
+>>> colors
+{'Green': ['Spinach']}
+>>> colors["Green"].append("Apples")
+>>> colors
+{'Green': ['Spinach', 'Apples']}
+```
+
+Here's how you get all the keys in a dictionary.
+
+```python
+>>> nums = {1: 'one', 2: 'two', 3: 'three', 8: 'eight'}
+>>> nums.keys()
+dict_keys([1, 2, 3, 8])
+```
+
+And here's how you get all the values in a dictionary.
+
+```python
+>>> nums = {1: 'one', 2: 'two', 3: 'three', 8: 'eight'}
+>>> nums.values()
+dict_values(['one', 'two', 'three', 'eight'])
+```
+
+A key value pair is called an item. If you use the `.items()` method, you'll get a list of tuples that represent the key value pairs.
+
+```python
+>>> nums = {1: 'one', 2: 'two', 3: 'three', 8: 'eight'}
+>>> nums.items()
+dict_items([(1, 'one'), (2, 'two'), (3, 'three'), (8, 'eight')])
+```
+
+Here's how to create a dictionary
+
+```python
+>>> dict(one=1, two=2, three=3)
+{'one': 1, 'two': 2, 'three': 3}
+```
+
+### Mutability
+
+Can the contents of an object be changed?
+
+- Mutable: Lists, Dictionaries, Sets
+- Immutable: Strings, Tuples, Numbers
+
+### Practice
+
+```python
+>>> my_list = ["h", "e", "l", "l", "o"]
+>>> my_list
+['h', 'e', 'l', 'l', 'o']
+>>> my_list.append("!")
+>>> my_list
+['h', 'e', 'l', 'l', 'o', '!']
+```
+
+Slicing - use the indexing to get items in a list:
+
+```python
+>>> # play with slices
+>>> len(my_list)
+6
+>>> new_list = my_list[4:6]
+>>> new_list
+['o', '!']
+>>> another_list = my_list[0:2]
+>>> another_list
+['h', 'e']
+```
+
+```python
+# Remove the first L:
+>>> my_list.remove("l")
+# Let's put it back at index 2
+>>> my_list.insert(2, "l")
+
+# Delete any element
+>>> del my_list[0]
+# Remove and return the last element. Useful for queues!
+>>> last_item = my_list.pop()
+>>> last_item
+
+# We can also look at individual items my using an index:
+>>> my_list[2]
+# Or we can see if a certain value exists in the list:
+>>> "!" in my_list
+# Let's sort our list in reverse order
+>>> my_list.sort(reverse=True)
+>>> my_list
+# Note that sort() doesn't return anything, it sorts the list in-place
+# You can also use the sorted() function to return a new, sorted list without modifying the old one
+>>> sorted(my_list, reverse=False)
+>>> my_list
+```
