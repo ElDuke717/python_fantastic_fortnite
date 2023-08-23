@@ -1796,3 +1796,107 @@ This is the end of my program.
 ```
  python3 -m pip install requests
 ```
+
+## APIs
+
+er the dictionary, an API is:
+
+    a set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service.
+
+An API is a standardized way of accessing information across the web, between clients and servers. These days most APIs are RESTful. That means they follow a common set of paradigms and practices.
+
+There are many types of APIs, but these days they’re commonly known to refer to web APIs.
+Authentication
+
+Some, but not all APIs require you to authenticate. Methods of authentication are out of the scope of this class, but you’ll be happy to know that there are plenty of free APIs available that require no authentication at all.
+Rate Limiting
+
+Some APIs allow unauthenticated requests, but they’re usually rate limited. Rate limiting means prevent the same client (usually by IP address) from making too many requests at once and overloading the server. The GitHub API allows 50 unauthenticated requests per hour per IP, or 10 unauthenticated requests to their Search API.
+
+Note: After the class, you can find a detailed list of APIs in this public-apis repo.
+Free APIs
+
+Free APIs are… free. That means that they may go down if their owner decides to drop their upkeep. If the API used in these examples doesn’t work in the future, try a different one listed in the public-apis repo linked to above.
+
+## Requests
+
+Here, we'll build a program that makes a request to an API and prints the response.
+
+```python
+# dog.py
+import requests
+
+api_url = "http://shibe.online/api/shibes?count=1"
+
+response = requests.get(api_url)
+
+status_code = response.status_code
+print("status code: ", status_code)
+```
+
+And we get the following output:
+
+```
+python3 dog.py
+/Users/nickhuemmer/projects/pyworkshop/env/lib/python3.9/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+status code:  200
+```
+
+We can also print the JSON
+
+```python
+import requests
+
+api_url = "http://shibe.online/api/shibes?count=1"
+
+response = requests.get(api_url)
+
+status_code = response.status_code
+print("status code: ", status_code)
+
+response_json = response.json()
+
+print("response_json: ", response_json)
+```
+
+Which will give us this output:
+
+```
+(env) nickhuemmer@Nicks-Mac-mini pyworkshop % python3 dog.py
+/Users/nickhuemmer/projects/pyworkshop/env/lib/python3.9/site-packages/urllib3/__init__.py:34: NotOpenSSLWarning: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+status code:  200
+response_json:  ['https://cdn.shibe.online/shibes/02c8fc76879f22a7a4d489540b1c33b83a47190b.jpg']
+```
+
+And we can follow the URL to get this shibe:
+
+![Alt text](https://cdn.shibe.online/shibes/02c8fc76879f22a7a4d489540b1c33b83a47190b.jpg)
+
+We can change the response variable to accept a parameter
+
+```python
+import requests
+
+api_url = "http://shibe.online/api/shibes?count=1"
+
+params = {
+    "count": 10
+}
+response = requests.get(api_url, params=params)
+
+status_code = response.status_code
+print("status code: ", status_code)
+
+response_json = response.json()
+
+print("response_json: ", response_json)
+```
+
+And we'll get 10 results back:
+
+```
+status code: 200
+response_json: ['https://cdn.shibe.online/shibes/b03bb2890ab0daa234a62d90cc733a13a51848dc.jpg', 'https://cdn.shibe.online/shibes/36f535863e1d5ddd411686ffa28f3526473fc987.jpg', 'https://cdn.shibe.online/shibes/ccc3fb6a4f8e307bb04778b86033bdacb5468d0f.jpg', 'https://cdn.shibe.online/shibes/9365926b50404f04ea74a8e4368c6937de4a8fce.jpg', 'https://cdn.shibe.online/shibes/5ae7886be9bbc78f1662ee8ecb573afed6858bb4.jpg', 'https://cdn.shibe.online/shibes/6b9cd56d966fa3d3dc160d4371d2cf3e0054b60d.jpg', 'https://cdn.shibe.online/shibes/8d516df8c3d71c69c67c7645a7d1733cedc769dc.jpg', 'https://cdn.shibe.online/shibes/665d40dd4b9b75ba98e44189f686b4333c9bed75.jpg', 'https://cdn.shibe.online/shibes/e74316a7aada5e9375ff2fa32fcd460b5ed7de67.jpg', 'https://cdn.shibe.online/shibes/ecbb196cb05089009808d9769432d1b2f9850853.jpg']
+```
