@@ -1354,3 +1354,445 @@ Slicing - use the indexing to get items in a list:
 >>> sorted(my_list, reverse=False)
 >>> my_list
 ```
+
+## Boolean Logic
+
+Truthiness is for a particular type, is the value true or false?
+
+You can test different things with `bool()` to determine their truthiness.
+
+```python
+>>> bool(0)
+False
+>>> bool(1)
+True
+>>> bool(-1)
+True
+>>> bool()
+False
+>>> bool(_)
+False
+>>> bool(None)
+False
+```
+
+```python
+>>> bool([])
+False
+>>> bool([1])
+True
+>>> bool(())
+False
+>>> bool({})
+False
+>>> # anything empty is falsy, anything with items in them are truthy
+```
+
+## Comparisons
+
+Strings are compared based on their ascii values.
+
+```python
+1 < 10  # 1 is less than 10? True
+20 <= 20  # 20 is less than or equal to 20? True
+10 > 1  # 10 is greater than 1? True
+-1 > 1  # -1 is greater than 1? False
+30 >= 30  # 30 is greater than or equal to 30? True
+```
+
+```python
+>>> "T" < "t"  # Upper case letters are "lower" valued.
+True
+>>> "a" < "b"
+True
+>>> "bat" < "cat"
+True
+
+```
+
+See how the values compare between letters?
+
+Note that lists can be directly compared in Python.
+
+```python
+>>> a = [1, 2, 3]
+>>> b = [1, 2, 3]
+>>> a == b
+True
+>>> a != b
+False
+```
+
+Identity operators
+
+```python
+>>> a = True
+>>> a is True
+True
+
+>>> b = False
+>>> b is False
+True
+>>> b is not True   # Opposite of is b True. aka is b False?
+True
+
+>>> c = None
+>>> c is None
+True
+>>> c is not None
+False
+
+```
+
+Here's an important distinction to make:
+
+```python
+>>> a = [1, 2, 3]
+>>> b = [1, 2, 3]
+
+>>> a == b  # Testing for equality. a and b contain the same values
+True
+>>> a is b  # Testing for identity. a and b are NOT the same object.
+False
+
+```
+
+Because their location is not the same in memory, though they are equal.
+
+### and or not
+
+```python
+>>> # and, or, not
+>>> a = True
+>>> b = True
+>>> a and b
+True
+>>> [1] and [2]
+[2]
+>>> # the second value was returned.
+>>> a = False
+>>> b = True
+>>> a and b
+False
+>>> a = False
+>>> b = False
+>>> a and b
+False
+```
+
+Here are some different comparisons: `and`, `or`, `not`.
+
+```python
+>>> # and, or, not
+>>> a = True
+>>> b = True
+>>> a and b
+True
+>>> [1] and [2]
+[2]
+>>> # the second value was returned.
+>>> a = False
+>>> b = True
+>>> a and b
+False
+>>> a = False
+>>> b = False
+>>> a and b
+False
+>>> a = True
+>>> b = False
+>>> a or b
+True
+>>> [] or [1]
+[1]
+>>> not 1
+False
+>>> not 0
+True
+```
+
+## Loops and Control Statements
+
+Here's a for loop in Javascript
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+```
+
+Here's a for loop in Python
+
+```python
+for i in range(10):
+    print(i)
+```
+
+Here's a while loop in Javascript
+
+```javascript
+let i = 0;
+while (i < 10) {
+  console.log(i);
+  i++;
+}
+```
+
+Here's a while loop in Python
+
+```python
+i = 0
+while i < 10:
+    print(i)
+    i += 1
+```
+
+Here's using range - note that it's not inclusive of 5
+
+```python
+>>> range(5)
+range(0, 5)
+>>> list(range(5))
+[0, 1, 2, 3, 4]
+>>> for num in range(5):
+...     print(num)
+...
+0
+1
+2
+3
+4
+>>>
+```
+
+Notice here that 1 is included, but 5 is not.
+
+```python
+>>> for num in range(1, 5):
+...     print(num)
+...
+1
+2
+3
+4
+>>>
+```
+
+Here we pass a third argument to range, which is our step value
+
+```python
+>>> for num in range(1, 7, 2):
+...     print(num)
+...
+1
+3
+5
+```
+
+### looping over dictionaries
+
+```python
+>>> nums = {1: 'one', 2: 'two', 3: 'three', 8: 'eight'}
+>>> for key in nums:
+...     print(key)
+...
+1
+2
+3
+8
+>>> for key in nums:
+...     print(nums[key])
+...
+one
+two
+three
+eight
+```
+
+Tuple unpacking - it's like destructuring in JavaScript, notice how we use the `.items()` method to get the key value pairs.
+
+```python
+>>> hex_colors = {"Red" : "#FF", "Green": "#008"}
+>>> hex_colors
+{'Red': '#FF', 'Green': '#008'}
+>>> for color in hex_colors:
+...     print(color)
+...
+Red
+Green
+>>> for label, hex in hex_colors.items():
+...     print(label, hex)
+...
+Red #FF
+Green #008
+```
+
+Here's a way to loop over items in a list and print the index and value of the item.
+
+```python
+>>> colors = ['Red', 'Green', 'Blue']
+>>> for i, color in enumerate(colors):
+...     print(f"index: {i}, color: {color}")
+...
+index: 0, color: Red
+index: 1, color: Green
+index: 2, color: Blue
+```
+
+And if statement will only run if a statement is true.
+
+```python
+>>> if 3 < 5:
+...     print("you got it right!")
+...
+you got it right!
+```
+
+```python
+>>> a = []
+>>> if a:
+...     print('hello')
+...
+>>> b = [1]
+>>> if b:
+...     print('fart')
+...
+fart
+```
+
+Else if is `elif` in Python.
+
+```python
+>>> if a:
+...     print("poop")
+... elif b:
+...     print("fart")
+... else:
+...     print('all good')
+...
+fart
+```
+
+### while loops
+
+Here is an implementation of a while loop. Note that the condition is checked before the loop is run.
+
+```python
+>>> counter = 0
+>>> max = 4
+>>> while counter < max:
+...     print(f"The count is: {counter}")
+...     counter = counter + 1
+...
+The count is: 0
+The count is: 1
+The count is: 2
+The count is: 3
+>>>
+```
+
+A break statement will break out of a loop.
+
+```python
+>>> count = 0
+>>> while True:
+...     count += 1
+...     if count == 5:
+...             print("count was reached")
+...             break
+...
+count was reached
+```
+
+## Python Files and Modules
+
+```python
+greetings = ["hello", "hi", "hey", "howdy", "hola"]
+
+for greeting in greetings:
+    print(f"{greeting}, World!")
+
+```
+
+use ctrl + shift + P and select run python file in terminal
+
+Here's the result of the program:
+
+```python
+(env) nickhuemmer@Nicks-Mac-mini pyworkshop % /Users/nickhuemmer/projects/pyworkshop/env/bin/python /Users/nickhuemmer/projects/pyworkshop/hello.py
+hello, World!
+hi, World!
+hey, World!
+howdy, World!
+hola, World!
+```
+
+### The Main Method
+
+In Python, there is no concept of a "main method" in the same way there is in languages like Java or C++. However, Python scripts often use the `if __name__ == "__main__":` construct to indicate the entry point of the program. This construct is used to determine whether the script is being run as the main program or if it's being imported as a module into another script.
+
+Here's how it works:
+
+```python
+def some_function():
+    # ... code ...
+
+def another_function():
+    # ... code ...
+
+if __name__ == "__main__":
+    # This block will only be executed if the script is run directly
+    # It won't be executed if the script is imported as a module
+
+    # Call functions or write code that you want to run when the script is run directly
+    some_function()
+    another_function()
+```
+
+When you run a Python script, the code inside the `if __name__ == "__main__":` block will be executed only if the script is the main program being run, not if it's imported as a module into another script.
+
+This construct is useful because it allows you to write reusable code that can be imported into other scripts without executing the main code block. It's a way to separate the behavior of a script when run directly from its behavior when used as a module in another script.
+
+The dunder file is the name of the file. This is especially useful when you're importing a file.
+
+```python
+
+# this will throw an error
+int("a")
+
+print("This is the end of my program.")
+
+```
+
+```
+(env) nickhuemmer@Nicks-Mac-mini pyworkshop % python3 exceptions.py
+Traceback (most recent call last):
+  File "/Users/nickhuemmer/projects/pyworkshop/exceptions.py", line 2, in <module>
+    int("a")
+ValueError: invalid literal for int() with base 10: 'a'
+```
+
+This code will throw and error and stop immediately,
+but if we add an except and as method, it will not.
+
+```python
+# this will throw an error
+try:
+    int("a")
+except ValueError as e:
+    print("ValueError:", e)
+print("This is the end of my program.")
+
+```
+
+```
+(env) nickhuemmer@Nicks-Mac-mini pyworkshop % python3 exceptions.py
+ValueError: invalid literal for int() with base 10: 'a'
+This is the end of my program.
+```
+
+## External Modules with Pip
+
+```
+ python3 -m pip install requests
+```
