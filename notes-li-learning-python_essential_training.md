@@ -116,4 +116,115 @@ Dictionaries are like objects in JavaScript. They are key-value pairs.
 
 They use curly brackets, like sets.
 
+## Operators
 
+Operators are used to perform operations on variables and values.
+
+Any time you do division, you get a float.
+
+The modulus operator gives you the remainder of a division operation.
+
+Logical operators are used to combine conditional statements. They are and, or, and not. They are represented by the words and, or, and not.
+
+Membership operators are used to test if a sequence is present in an object. They are in and not in.
+
+Identity operators are used to compare the objects, not if they are equal, but if they are the same object, with the same memory location. They are is and is not.
+
+## Control Flow
+
+The if statement
+
+```python
+a = True
+if a:
+    print('It is true!')
+    print('Also print this')
+else:
+    print('It is false!')
+print('Always print this')
+
+```
+
+It is true!
+Also print this
+Always print this
+
+### loops
+
+```python
+>>> for i in range(10):
+...     print(i)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+```
+
+#### while loops
+
+```python
+>>> a = 0
+>>> while a < 5:
+...     print(a)
+...     a = a + 1
+...
+0
+1
+2
+3
+4
+
+```
+
+## Classes and Instances
+
+Classes are used to create objects. They are like blueprints for objects.
+
+Objects are instances of classes.
+
+Classes look like functions - but they are not functions and use the class keyword and are uppercase.
+
+Classes are like cookie cutters, and objects are like cookies.
+
+Classes are like factories, and objects are like products.
+
+Classes are like recipes, and objects are like dishes.
+
+Classes are like templates, and objects are like documents.
+
+```python
+class Dog:
+    def __init__(self, name):
+        self.name = name
+        self.legs = 4
+
+    def speak(self):
+        print(self.name + ' says: Bark!')
+```
+
+```python
+>>> class Dog:
+...     def __init__(self, name):
+...         self.name = name
+...         self.legs = 4
+...
+...     def speak(self):
+...         print(self.name + ' says: Bark!')
+>>> my_dog = Dog('Wanda')
+>>> my_dog.speak()
+Wanda says: Bark!
+```
+
+Classes are very similar to how they are in JavaScript. The main difference is that you have to use the self keyword to refer to the object itself (in JavaScript, you use the this keyword).
+
+In Python, **init** is a special method (also called a constructor) that is automatically called when a new instance of a class is created. It's used to initialize the attributes or properties of the object.
+
+`__init__` is the constructor, it is a special method that is automatically called when a new instance of a class is created.
