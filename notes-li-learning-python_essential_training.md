@@ -130,6 +130,8 @@ Membership operators are used to test if a sequence is present in an object. The
 
 Identity operators are used to compare the objects, not if they are equal, but if they are the same object, with the same memory location. They are is and is not.
 
+Note that you can multiply a string by a number to repeat it. E.g. 'hello' \* 3 will give you 'hellohellohello'.
+
 ## Control Flow
 
 The if statement
@@ -228,3 +230,46 @@ Classes are very similar to how they are in JavaScript. The main difference is t
 In Python, **init** is a special method (also called a constructor) that is automatically called when a new instance of a class is created. It's used to initialize the attributes or properties of the object.
 
 `__init__` is the constructor, it is a special method that is automatically called when a new instance of a class is created.
+
+## Ints and Floats
+
+`int()` is a class, not a function.
+
+This is called casting:
+
+```python
+# this is called casting, converting one type to another
+int(4 ** 4.0)
+
+>>> int(8.9)
+8
+# When you cast from a float to an int, it truncates the decimal part. It doesn't round it.
+
+# Here you can use the round function to round the output of dividing 14 by 3
+>>> round(14/3, 2)
+4.67
+# Python will only round so far. It won't round to the nearest 100th, for example.  This is called precision and it is a limitation of the float type and has to do with the amount of memory that is allocated to store the number.
+>>> 14/3
+4.666666666666667
+>>>
+```
+
+## Other types of numbers - see notebook notes.
+
+## Strings
+
+Note that you can use single or double quotes to create strings.
+
+You can use triple quotes to create multi-line strings.
+
+You can use the backslash to escape characters.
+
+You can use the backslash to escape quotes.
+
+f strings are a way to format strings. They are a way to insert variables into strings.
+
+```python
+>>> name = 'Nick'
+>>> f'Hello, {name}'
+'Hello, Nick'
+```
