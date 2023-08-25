@@ -70,3 +70,50 @@ Here are some basic commands for Jupyter Notebook:
 - delete cell: dd
 
 - undo delete cell: z
+
+## Variables and Types
+
+Variables are used to store values. They are like boxes that hold values. You can change the value of a variable at any time.
+
+You can't have a variable with a name like 1x. It has to start with a letter or an underscore.
+Variable names start with lowercase letters.
+
+Whole numbers are ints. Numbers with decimals are floats.
+
+Numbers with a j at the end are complex numbers.
+
+Complex numbers are numbers with a real part and an imaginary part.
+
+```
+1j * 1j
+```
+
+## Data Structures
+
+Data structures are ways of organizing data. They are ways of storing data in a computer.
+
+Sets are unordered collections of unique elements. They are like lists, but they don't have any duplicates. They are unordered, so you can't index them. You can also compare them directly, and if they have the same elements, they are equal, even though they are not in the same order, like lists.
+
+### Lists
+
+just like arrays in other languages, like JavaScript
+
+### Sets
+
+They are groups of unique values. They use curly brackets.
+
+### Tuples
+
+Why do we use them?
+
+- They're memory efficient.
+- They're immutable, so they can't be changed.
+- Good for storing things that shouldn't be changed.
+
+### Dictionaries
+
+Dictionaries are like objects in JavaScript. They are key-value pairs.
+
+They use curly brackets, like sets.
+
+
