@@ -273,3 +273,16 @@ f strings are a way to format strings. They are a way to insert variables into s
 >>> f'Hello, {name}'
 'Hello, Nick'
 ```
+
+```python
+bool(-1) == 1
+True
+```
+
+In Python, the `bool()` function is used to convert a value to its boolean equivalent. The boolean value `True` is associated with non-zero values, and `False` is associated with zero.
+
+When you pass the integer value `-1` to the `bool()` function, it gets converted to its boolean equivalent. Any non-zero integer is considered `True` in a boolean context.
+
+So, `bool(-1)` evaluates to `True`, and since `True` is represented as `1` in Python, the expression `bool(-1) == 1` is indeed `True`.
+
+## Lists
