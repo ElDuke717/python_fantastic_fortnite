@@ -286,3 +286,125 @@ When you pass the integer value `-1` to the `bool()` function, it gets converted
 So, `bool(-1)` evaluates to `True`, and since `True` is represented as `1` in Python, the expression `bool(-1) == 1` is indeed `True`.
 
 ## Lists
+
+# Control Flow
+
+## if and else
+
+You can use else, if or elif in place of else if.
+
+```python
+def fizzBuzz(num):
+    if num % 15 == 0: # you can use 15 rather than checking the modulus against 3 or 5, this is more concise.
+        print('FizzBuzz')
+    elif num % 3 == 0:
+        print('Fizz')
+    elif num % 5 == 0:
+        print('Buzz')
+    else:
+        print(num)
+
+
+for num in range(0, 100):
+     fizzBuzz(num)
+```
+
+Here's a one liner way to check the modulus of three with '
+Fizz
+
+```python
+for num in range(0, 100):
+    print(Fizz' * (num % 3 == 0) + 'Buzz' * (num % 5 == 0) or num)
+```
+
+## while loops
+
+They can be very dangerous because they can run forever.
+
+```python
+
+wait_until = datetime.now().second + 2
+
+while datetime.now().second != wait_until:
+    print('Still waiting!')
+
+print(f'We are at {wait_until} seconds!')
+```
+
+Pass is a way to do nothing. It is used as a placeholder.
+
+```python
+wait_until = datetime.now().second + 2
+
+while datetime.now().second != wait_until:
+    pass
+
+print(f'We are at {wait_until} seconds!')
+```
+
+Break is used to break out of a loop.
+
+```python
+wait_until = datetime.now().second + 2
+
+while True:
+    if datetime.now().second == wait_until:
+        print(f'We are at {wait_until} seconds!')
+        break
+```
+
+We are at 5 seconds!
+
+Continue is used to skip the rest of the code in a loop and go to the next iteration.
+
+```python
+for num in range(0, 100):
+    if num % 2 == 0:
+        continue
+    print(num)
+```
+
+## for loops
+
+All statements that can be used for while loops can also be used for for loops.
+
+```python
+for num in range(0, 100):
+    print(num)
+```
+
+## For / Else
+
+```python
+for number in range(2, 100):
+    for factor in range(2, int(number ** 0.5) + 1):
+        if number % factor == 0:
+            break
+    else:
+        print(f'{number} is prime!')
+2 is prime!
+3 is prime!
+5 is prime!
+7 is prime!
+11 is prime!
+13 is prime!
+17 is prime!
+19 is prime!
+23 is prime!
+29 is prime!
+31 is prime!
+37 is prime!
+41 is prime!
+43 is prime!
+47 is prime!
+53 is prime!
+59 is prime!
+61 is prime!
+67 is prime!
+71 is prime!
+73 is prime!
+79 is prime!
+83 is prime!
+89 is prime!
+97 is prime!     
+```
