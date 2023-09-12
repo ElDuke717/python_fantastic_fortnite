@@ -533,3 +533,168 @@ A string
 >>> print(len(my_list))
 4
 ```
+
+## Conditional Statements
+
+```python
+if condtional statement is True:
+    # execute expression1
+    pass
+else:
+    # execute expression2
+    pass
+
+```
+
+There are three types of conditional statements in Python:
+
+    if
+    if-else
+
+    if-elif-else
+
+### if
+
+```python
+>>> num = 5
+>>>
+>>> if (num == 5):  # The condition is true
+...     print("The number is equal to 5")  # The code is executed
+...
+The number is equal to 5
+>>> if num > 5:  # The condtion is false
+...     print("The number is greater than 5")  # The code is not executed
+...
+>>>
+```
+
+### if with logical operators
+
+```python
+num = 12
+
+if num % 2 == 0 and num % 3 == 0 and num % 4 == 0:
+    # Only works when num is a multiple of 2, 3, and 4
+    print("The number is a multiple of 2, 3, and 4")
+
+if (num % 5 == 0 or num % 6 == 0):
+    # Only works when num is either a multiple of 5 or 6
+    print("The number is a multiple of 5 and/or 6")
+```
+
+You can also nest if statements.
+
+```python
+>>> if num >= 0 and num <= 100:
+...     if num >= 50 and num <= 75:
+...         if num >= 60 and num <= 70:
+...             print("The number is in the 60-70 range")
+...
+The number is in the 60-70 range
+```
+
+Creating and editing values:
+
+```python
+>>> num = 10
+>>> if num > 5:
+...     num = 20  # Assigning a new value to num
+...     new_num = num * 5  # Creating a new value called newNum
+...
+>>> # The if condition ends, but the changes made inside it remain
+>>> print(num)
+20
+>>> print(new_num)
+100
+```
+
+### if-else
+
+```python
+>>> if num <= 50:
+...     print("The number is less than or equal to 50")
+... else:
+...     print("The number is greater than 50")
+...
+The number is greater than 50
+```
+
+You don't have to restate a condition if the first is false.
+
+#### Conditional Expressions
+
+Conditional expressions use the functionality of an if-else statement in a different way.
+
+The expression returns an output based on the condition we provide. This output can be stored in a variable.
+
+A conditional expression can be written in the following way:
+
+```python
+output_value1 if condition else output_value2
+```
+
+```python
+>>> num = 60
+>>>
+>>> output = "The number is less than or equal to 50" \
+...     if num <= 50 else "The number is greater than 50"
+>>>
+>>> print(output)
+The number is greater than 50
+```
+
+    Please note that the backslash \ in the above code is only a line continuation character that can be used to split a single line into multiple lines.
+
+### if-elif-else
+
+```python
+light = "Yellow"
+
+if light == "Green":
+    print("Go")
+
+elif light == "Yellow":
+    print("Caution")
+
+elif light == "Red":
+    print("Stop")
+
+else:
+    print("Incorrect light signal")
+
+```
+
+Note: An if-elif statement can exist on its own without an else block at the end. However, an elif cannot exist without an if statement preceding it (which naturally makes sense).
+
+```python
+>>> num = 5
+>>>
+>>> if num == 0:
+...     print("Zero")
+... elif num == 1:
+...     print("One")
+... elif num == 2:
+...     print("Two")
+... elif num == 3:
+...     print("Three")
+... elif num == 4:
+...     print("Four")
+... elif num == 5:
+...     print("Five")
+... elif num == 6:
+...     print("Six")
+... elif num == 7:
+...     print("Seven")
+... elif num == 8:
+...     print("Eight")
+... elif num == 9:
+...     print("Nine")
+...
+Five
+```
+
+An important thing to keep in mind is that an if-elif-else or if-elif statement is not the same as multiple if statements. if statements act independently.
+
+If the conditions of two successive ifs are True, both statements will be executed.
+
+On the other hand, in if-elif-else, when a condition evaluates to True, the rest of the statement’s conditions are not evaluated.
