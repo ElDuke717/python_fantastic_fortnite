@@ -698,3 +698,444 @@ An important thing to keep in mind is that an if-elif-else or if-elif statement 
 If the conditions of two successive ifs are True, both statements will be executed.
 
 On the other hand, in if-elif-else, when a condition evaluates to True, the rest of the statement’s conditions are not evaluated.
+
+# Functions
+
+Why Use Functions?
+
+Think of a function as a box which performs a task. We give it an input and it returns an output.
+
+We don’t need to write the set of instructions again for a different input, we could just call the function again.
+
+Functions are useful because they make the code concise and simple. The primary benefits of using functions are:
+
+    Reusability: A function can be used over and over again. You do not have to write redundant code. For example, a sum() function could compute the sum of all the integers we provide it. We won’t have to write the summing operation ourselves each time.
+
+    Simplicity: Functions are easy to use and make the code readable. We only need to know the inputs and the purpose of the function without focusing on the inner workings. This abstraction allows us to focus more on gaining the output instead of figuring out how it was computed.
+
+An input isn’t even necessary. A function could perform its own computations to complete a task.
+
+## Types of Functions in Python
+
+Functions are perhaps the most commonly used feature of Python. There are two basic types of functions in Python:
+
+    Built-in functions
+    User-defined functions
+
+len(), min(), and print() are examples of built-in functions.
+
+The coolest feature, however, is that the language allows us to create our own functions that perform the tasks we require.
+
+## The return Statement
+
+So far, we’ve only defined functions that print something. They don’t return anything back to us. But if we think back, functions return values all the time. Just take len() for example. It returns an integer which is the length of the data structure.
+
+To return something from a function, we must use the return keyword. Keep in mind that once the return statement is executed, the compiler ends the function. Any remaining lines of code after the return statement will not be executed.
+
+## Function Scope
+
+The scope of a function means the extent to which the variables and other data items made inside the function are accessible in code.
+
+In Python, the function scope is the function’s body.
+
+Whenever a function runs, the program moves into the function scope. It moves back to the outer scope once the function has ended.
+Data Lifecycle
+
+In Python, data created inside the function cannot be used from the outside unless it is being returned from the function.
+
+Variables in a function are isolated from the rest of the program. When the function ends, they are released from memory and cannot be recovered.
+
+```python
+>>> name = "Ned"
+>>>
+>>>
+>>> def func():
+...     name = "Stark"
+...
+>>>
+>>> func()
+>>> print(name)  # The value of 'name' remains unchanged.
+Ned
+```
+
+Note that a function can access variables from the outer scope. However, it cannot modify them unless they are passed as arguments.
+
+# Scoping differences between Python and JavaScript
+
+### JavaScript
+
+1. **Block Scoping with `let` and `const`:** With ES6, JavaScript introduced `let` and `const`, which are block-scoped.
+2. **Function Scoping with `var`:** Before ES6, we had only `var`, which is function-scoped.
+3. **Hoisting:** In JavaScript, variable and function declarations are hoisted to the top of their containing function or block, but the initializations are not.
+4. **Nested Functions:** Functions can be nested within other functions, and inner functions have access to the variables in the outer functions, creating closures.
+5. **Global Scope:** Variables defined outside any function or block are in the global scope, and they can be accessed from any part of the code, including functions.
+6. **`this` Keyword:** JavaScript functions have a `this` keyword which can differ depending on how the function is called (e.g., as a method, regular function, arrow function, etc.).
+
+Example:
+
+```javascript
+function outer() {
+  let a = 10;
+  var b = 20;
+
+  function inner() {
+    let c = 30;
+    console.log(a); // Accessible
+    console.log(b); // Accessible
+  }
+
+  console.log(c); // Error
+}
+```
+
+### Python
+
+1. **Function-level Scoping:** Python doesn't have block-level scoping for variables. A variable declared within a function is only available within that function.
+2. **No Hoisting:** Variables in Python are not hoisted. You have to declare a variable before you use it.
+3. **Nested Functions:** Like JavaScript, Python allows nested functions, and inner functions can access outer function variables.
+4. **Global and Nonlocal Keywords:** Python uses `global` and `nonlocal` keywords to refer to a variable in the global or outer function scope respectively.
+5. **Built-in Scope:** Python has a built-in scope, which includes built-in functions like `len()` and `abs()`.
+6. **`self` Parameter:** In Python, instance methods in classes need to take a `self` parameter to refer to the instance of the class, somewhat similar to `this` in JavaScript but more explicit.
+
+Example:
+
+```python
+def outer():
+    a = 10
+
+    def inner():
+        nonlocal a
+        a += 20
+        print(a)  # Accessible and will print 30
+
+    inner()
+    print(a)  # Will print 30
+
+outer()
+```
+
+### Summary
+
+- JavaScript has block-level scoping with `let` and `const` and function-level scoping with `var`.
+- Python has function-level scoping by default.
+- Both languages allow nested functions and closures.
+- Hoisting is unique to JavaScript.
+- Python requires `global` or `nonlocal` to change variables in outer scopes, while JavaScript uses `var`, `let`, or `const`.
+
+Given your background, grasping these distinctions will help you switch gears between front-end development and Python more efficiently.
+
+Note that this will print 30 twice. This is because the `nonlocal` keyword allows us to modify the variable in the outer scope.
+
+```python
+def outer():
+    a = 10
+
+    def inner():
+        nonlocal a  # tell Python that a is not local to inner, but is in the nearest outer scope
+        a += 20
+        print(a)  # Will print 30
+
+    inner()
+    print(a)  # Will also print 30
+
+outer()
+
+```
+
+While this will print 30 and 10:
+
+```python
+def outer():
+    a = 10
+
+    def inner(a):
+        a += 20
+        print(a)  # will print 30
+
+    inner(a)
+    print(a)  # Will print 10
+
+outer()
+
+```
+
+See how the num_list has been changed since it was called as an argument.
+
+```python
+>>> num_list = [10, 20, 30, 40]
+>>> print(num_list)
+[10, 20, 30, 40]
+>>>
+>>>
+>>> def multiply_by_10(my_list):
+...     my_list[0] *= 10
+...     my_list[1] *= 10
+...     my_list[2] *= 10
+...     my_list[3] *= 10
+...
+>>>
+>>> multiply_by_10(num_list)
+>>> print(num_list)  # The contents of the list have been changed
+[100, 200, 300, 400]
+```
+
+## String Methods
+
+### String Methods
+
+Strings are objects in Python. This means that they have certain properties and methods that we can use to perform operations on them.
+
+A method is a function that belongs to an object. It is called using the dot notation.
+
+```python
+>>> my_string = "Hello World"
+>>> print(my_string.upper())
+HELLO WORLD
+>>> print(my_string.lower())
+hello world
+>>> print(my_string.title())
+Hello World
+>>> print(my_string.count("l"))
+3
+>>> print(my_string.count("o"))
+2
+>>> print(my_string.count(" "))
+1
+>>> print(my_string.count("Hello"))
+1
+>>> print(my_string.count("hello"))
+0
+>>> print(my_string.count("llo"))
+1
+>>> print(my_string.count("ll"))
+1
+>>> print(my_string.count("lll"))
+0
+```
+
+See built in String methods
+
+```
+
+```
+
+## Lambdas
+
+Lambda functions are anonymous functions. They are functions that are defined without a name.
+
+```python
+>>> triple = lambda num : num * 3  # Assigning the lambda to a variable
+>>>
+>>> print(triple(10))  # Calling the lambda and giving it a paramete
+30
+
+>>> triple = lambda num : num * 3  # Assigning the lambda to a variable
+>>>
+>>> print(triple(10))  # Calling the lambda and giving it a paramete
+30
+>>> concat_strings = lambda a, b, c: a[0] + b[0] + c[0]
+>>>
+>>> print(concat_strings("World", "Wide", "Web"))
+WWW
+```
+
+A lambda cannot have a multi-line expression. This means that our expression needs to be something that can be written in a single line.
+
+They are perfect for one line conditional statements.
+
+```python
+
+```
+
+> > > my_func = lambda num: "High" if num > 50 else "Low"
+> > > my_func(20)
+> > > 'Low'
+> > > my_func(60)
+> > > 'High'
+
+```
+
+Lambdas are really useful when a function requires another function as its argument.
+```
+
+```python
+def factorial(n):
+    i
+
+```
+
+## Loops
+
+Definition
+
+    A loop is a control structure that is used to perform a set of instructions for a specific number of times.
+
+Loops solve the problem of having to write the same set of instructions over and over again. We can specify the number of times we want the code to execute.
+
+One of the biggest applications of loops is traversing data structures, e.g. lists, tuples, sets, etc. In such a case, the loop iterates over the elements of the data structure while performing a set of operations each time.
+
+Just like conditional statements, a loop is classified as a control structure because it directs the flow of a program by making varying decisions in its iterations.
+
+Loops are a crucial part of many popular programming languages such as C++, Java, and JavaScript.
+
+### While Loops
+
+The while loop keeps iterating over a certain set of operations as long as a certain condition holds True.
+
+It operates using the following logic:
+
+While this condition is true, keep the loop running.
+
+Watch out for  infinite loops.
+
+
+
+
+```python
+>>> num = 0
+>>>
+>>> while num < 10:
+...     print(num)
+...     num += 1
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+### For Loops
+
+The range function is a built-in function in Python that generates a sequence of numbers. It is commonly used in for loops.
+
+```python
+range(start, end, step)
+```
+
+```python
+>>> for num in range(10):
+...     print(num)
+...
+0
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+Here's a for loop using the range
+
+```python
+>>> for i in range(1, 11):  # A sequence from 1 to 10
+...     if i % 2 == 0:
+...         print(i, " is even")
+...     else:
+...         print(i, " is odd")
+...
+1  is odd
+2  is even
+3  is odd
+4  is even
+5  is odd
+6  is even
+7  is odd
+8  is even
+9  is odd
+10  is even
+>>>
+```
+
+Iterate between the first index and the last index in a list using the length of the list.
+
+```python
+>>> float_list = [2.5, 16.42, 10.77, 8.3, 34.21]
+>>> print(float_list)
+[2.5, 16.42, 10.77, 8.3, 34.21]
+>>>
+>>> for i in range(0, len(float_list)):  # Iterator traverses to the last index of the list
+...     float_list[i] = float_list[i] * 2
+...
+>>> print(float_list)
+[5.0, 32.84, 21.54, 16.6, 68.42]
+```
+
+Here we use the range function to skip every third number.
+
+```python
+>>> for i in range(1, 11, 3):  # A sequence from 1 to 10 with a step of 3
+...     print(i)
+...
+1
+4
+7
+10
+```
+
+## Nested Loops
+
+### Execution of Nested Loops
+
+Python lets us easily create loops within loops. There’s only one catch: the inner loop will always complete before the outer loop.
+
+For each iteration of the outer loop, the iterator in the inner loop will complete its iterations for the given range, after which the outer loop can move to the next iteration.
+
+Here's an example of a nested loop
+
+```python
+>>> n = 50
+>>> num_list = [10, 25, 4, 23, 6, 18, 27, 47]
+>>>
+>>> for n1 in num_list:
+...     for n2 in num_list:  # Now we have two iterators
+...         if(n1 != n2):
+...             if(n1 + n2 == n):
+...                 print(n1, n2)
+...
+23 27
+27 23
+```
+
+Each element is compared with every other element to check if n1 + n2 is equal to n.
+
+## Loop Control Statements
+
+### Break
+
+The break statement is used to terminate a loop. It is used to break out of a loop when a certain condition is met.
+
+```python
+>>> for n1 in num_list:
+...     for n2 in num_list:
+...         if(n1 != n2):
+...             if(n1 + n2 == n):
+...                 found = True  # Set found to True
+...                 break  # Break inner loop if a pair is found
+...     if found:
+...         print(n1, n2) # Print the pair
+...         break  # Break outer loop if a pair is found
+...
+23 27
+```
+
+
+### Continue
+
+The continue statement is used to skip the current iteration of a loop. It is used to skip over a part of a loop when a certain condition is met.
+
+
+
+### The pass Keyword
+
+In all practical meaning, the `pass` statement does nothing to the code execution. It can be used to represent an area of code that needs to be written. Hence, it is simply there to assist you when you haven’t written a piece of code but still need your entire program to execute.
